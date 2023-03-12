@@ -2,12 +2,15 @@ import onnx
 import onnxruntime
 import numpy as np
 from PIL import Image
-
+import base64
+from io import BytesIO
 
 class Prep:
 
-    def preprocess(self, byte):
-        image = Image.frombytes(byte)
+    def preprocess(self, im_b64):
+        im_bytes = base64.b64decode(im_b64)  # im_bytes is a binary image
+        im_file = BytesIO(im_bytes)  # convert image to file-like object
+        image = Image.frombytes(im_file)
         # Convert to RGB format if needed
         if image.mode != 'RGB':
             image = image.convert('RGB')
