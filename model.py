@@ -6,8 +6,8 @@ from PIL import Image
 
 class Prep:
 
-    def preprocess(self, image_path):
-        image = Image.open(image_path)
+    def preprocess(self, byte):
+        image = Image.frombytes(byte)
         # Convert to RGB format if needed
         if image.mode != 'RGB':
             image = image.convert('RGB')
